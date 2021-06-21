@@ -15,7 +15,7 @@ var implosionCheck = 0;
 var TIER_NAMES = [null, "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eight"];
 var DISPLAY_NAMES = [null, "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth"];
 var forceHardReset = false;
-var player = {
+var newPlayer = {
     money: new Decimal(10),
     tickSpeedCost: new Decimal(1000),
     tickspeed: new Decimal(1000),
@@ -275,6 +275,11 @@ var player = {
             level: new Decimal(0),
             upgrades: [],
             unlocked: false
+        },
+        darkEssence: {
+            amount: new Decimal(0),
+            times: 0,
+            upgrades: []
         }
     },
     why: 0,
@@ -309,7 +314,7 @@ var player = {
 
 };
 
-
+var player = newPlayer
 var defaultStart = $.extend(true, {}, player);
 
 

@@ -357,6 +357,38 @@ if (player.version < 5) {
           limit: new Decimal(0),
           isOn: false
       }
+
+  if (player.adBlack === undefined) {
+    player.adBlack = {
+        darkwell: {
+            darkness: new Decimal(0),
+            level: new Decimal(0),
+            upgrades: [],
+            unlocked: false
+        },
+        darkEssence: {
+            amount: new Decimal(0),
+            times: 0,
+            upgrades: []
+        }
+    }
+  }
+
+  if (player.adBlack.darkwell === undefined) {
+    player.adBlack.darkwell = {
+        darkness: new Decimal(0),
+        level: new Decimal(0),
+        upgrades: [],
+        unlocked: false
+    }
+  }
+
+  if (player.adBlack.darkEssence === undefined) {
+    player.adBlack.darkEssence = {
+        amount: new Decimal(0),
+        times: 0,
+        upgrades: []
+    }
   }
 
   transformSaveToDecimal();
