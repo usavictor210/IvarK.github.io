@@ -1,10 +1,10 @@
 function getDimensionBoostPower() {
   if (player.currentChallenge == "challenge11" || player.currentChallenge == "postc1") return Decimal.fromNumber(1);
 
-  var ret = 2
-  if (player.infinityUpgrades.includes("resetMult")) ret = 2.5
-  if (player.challenges.includes("postc7")) ret = 4
-  if (player.currentChallenge == "postc7" || player.timestudy.studies.includes(81)) ret = 10
+  var ret = 1.8;
+  if (player.infinityUpgrades.includes("resetMult")) ret = 2.25
+  //if (player.challenges.includes("postc7")) ret = 4
+  //if (player.currentChallenge == "postc7" || player.timestudy.studies.includes(81)) ret = 10
 
   if (player.achievements.includes("r101")) ret = ret*1.01
   if (player.timestudy.studies.includes(83)) ret = Decimal.pow(1.0004, player.totalTickGained).times(ret);
@@ -71,7 +71,7 @@ function softReset(bulk) {
       interval: null,
       lastUpdate: player.lastUpdate,
       achPow: player.achPow,
-    newsArray: player.newsArray,
+      newsArray: player.newsArray,
       autobuyers: player.autobuyers,
       costMultipliers: [new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e8), new Decimal(1e10), new Decimal(1e12), new Decimal(1e15)],
       tickspeedMultiplier: new Decimal(10),
@@ -149,6 +149,7 @@ function softReset(bulk) {
       dimlife: player.dimlife,
       dead: player.dead,
       dilation: player.dilation,
+      adBlack: player.adBlack,
       why: player.why,
       options: player.options
   };
@@ -179,10 +180,6 @@ if (player.currentChallenge == "postc2") {
   if (player.achievements.includes("r45")) player.tickspeed = player.tickspeed.times(0.98);
   if (player.achievements.includes("r66")) player.tickspeed = player.tickspeed.times(0.98);
   if (player.achievements.includes("r83")) player.tickspeed = player.tickspeed.times(Decimal.pow(0.95,player.galaxies));
-
-
-
-
 
   //updateInterval();
   if (player.eternities < 30) {
@@ -216,22 +213,29 @@ if (player.currentChallenge == "postc2") {
 
 function getShiftRequirement(bulk) {
   let amount = 20;
-  if (player.currentChallenge == "challenge4") {
+  if (player.resets > 3) amount = 30;
+
+  // deciding the dimension tier
+  if (player.currentChallenge == "challenge4") { // if you're in challenge 6
       tier = Math.min(player.resets + bulk + 4, 6)
-      if (tier == 6) amount += (player.resets+bulk - 2) * 20;
+      if (tier == 6) amount += (player.resets + bulk - 2) * 20;
   } else {
       tier = Math.min(player.resets + bulk + 4, 8)
   }
 
-  let mult = 15
-  if (player.timestudy.studies.includes(211)) mult -= 5
-  if (player.timestudy.studies.includes(222)) mult -= 2
+  // now the amount of dimensions
+  let mult = 20
 
-  if (tier == 8) amount += Math.ceil((player.resets+bulk - 4) * mult);
+  // time studies
+  if (player.timestudy.studies.includes(211)) mult -= 4
+  if (player.timestudy.studies.includes(222)) mult -= 1
+
+  if (tier == 8) amount += Math.ceil((player.resets + bulk - 4) * mult);
   if (player.currentEternityChall == "eterc5") {
-      amount += Math.pow(player.resets+bulk, 3) + player.resets+bulk
+      amount += Math.pow(player.resets + bulk, 3) + player.resets + bulk
   }
 
+  // infinity upgrades and challenges
   if (player.infinityUpgrades.includes("resetBoost")) amount -= 9;
   if (player.challenges.includes("postc5")) amount -= 1
 
@@ -244,10 +248,12 @@ document.getElementById("softReset").onclick = function () {
   auto = false;
   if (player.infinityUpgrades.includes("bulkBoost")) maxBuyDimBoosts(true);
   else softReset(1)
-  
-  for (var tier = 1; tier<9; tier++) {
+
+  // 
+  for (var tier = 1; tier < 9; tier++) {
     var name = TIER_NAMES[tier];
     var mult = getDimensionBoostPower().pow(player.resets + 1 - tier)
     if (mult > 1) floatText(name + "D", "x" + shortenDimensions(mult))
   }
+
 };

@@ -7,6 +7,7 @@ const allAchievements = {
   r16 : "We couldn't afford 9",
   r17 : "Not a luck related achievement",
   r18 : "90 degrees to infinity",
+  r19 : "Something's wrong",
   r21 : "To infinity!",
   r22 : "Fake News",
   r23 : "The 9th Dimension is a lie",
@@ -15,6 +16,7 @@ const allAchievements = {
   r26 : "You got past The Big Wall",
   r27 : "Double Galaxy",
   r28 : "There's no point in doing that",
+  r29 : "Down the Rabbit Hole",
   r31 : "I forgot to nerf that",
   r32 : "The Gods are pleased",
   r33 : "That's a lot of infinites",
@@ -23,6 +25,7 @@ const allAchievements = {
   r36 : "Claustrophobic",
   r37 : "That's fast!",
   r38 : "I don't believe in Gods",
+  r39 : "Never the same again",
   r41 : "Spreading Cancer",
   r42 : "Supersanic",
   r43 : "Zero Deaths",
@@ -31,6 +34,7 @@ const allAchievements = {
   r46 : "Multidimensional",
   r47 : "Daredevil",
   r48 : "AntiChallenged",
+  r49 : "Alterations",
   r51 : "Limit Break",
   r52 : "Age of Automation",
   r53 : "Definitely not worth it",
@@ -39,6 +43,7 @@ const allAchievements = {
   r56 : "Many Deaths",
   r57 : "Gift from the Gods",
   r58 : "Is this hell?",
+  r59 : "Hell or Heaven",
   r61 : "Bulked up",
   r62 : "Oh hey, you're still here",
   r63 : "A new beginning.",
@@ -47,6 +52,7 @@ const allAchievements = {
   r66 : "Faster than a squared potato",
   r67 : "Infinitely Challenging",
   r68 : "You did this again just for the achievement right?",
+  r69 : "nil",
   r71 : "ERROR 909: Dimension not found",
   r72 : "Can't hold all these infinities",
   r73 : "This achievement doesn't exist",
@@ -55,6 +61,7 @@ const allAchievements = {
   r76 : "One for each dimension",
   r77 : "How the antitables have turned",
   r78 : "Blink of an eye",
+  r79 : "Left blank",
   r81 : "Hevipelle did nothing wrong",
   r82 : "Anti-antichallenged",
   r83 : "YOU CAN GET 50 GALAXIES!??",
@@ -63,6 +70,7 @@ const allAchievements = {
   r86 : "Do you even bend time bro?",
   r87 : "2 Million Infinities",
   r88 : "Yet another infinity reference",
+  r89 : "MISSING ACHIEVEMENT",
   r91 : "Ludicrous Speed",
   r92 : "I brake for nobody",
   r93 : "MAXIMUM OVERDRIVE",
@@ -71,6 +79,7 @@ const allAchievements = {
   r96 : "Time is relative",
   r97 : "Yes. This is hell.",
   r98 : "0 degrees from infinity",
+  r99 : "Eternal Suffering",
   r101 : "Costco sells dimboosts now",
   r102 : "This mile took an Eternity",
   r103 : "This achievement doesn't exist II",
@@ -79,6 +88,7 @@ const allAchievements = {
   r106 : "The swarm",
   r107 : "Do you really need a guide for this?",
   r108 : "We could afford 9",
+  r109 : "We can't afford 10",
   r111 : "Yo dawg, I heard you liked infinities...",
   r112 : "Never again",
   r113 : "Long lasting relationship",
@@ -87,6 +97,7 @@ const allAchievements = {
   r116 : "Do I really need to infinity",
   r117 : "8 nobody got time for that",
   r118 : "IT'S OVER 9000",
+  r119 : "Theory of Nothing",
   r121 : "Can you get infinite IP?",
   r122 : "You're already dead.",
   r123 : "5 more eternities until the update",
@@ -95,6 +106,7 @@ const allAchievements = {
   r126 : "Popular music",
   r127 : "But I wanted another prestige layer...",
   r128 : "What do I have to do to get rid of you",
+  r129 : "harness corruption;",
   r131 : "No ethical consumption",
   r132 : "Unique snowflakes",
   r133 : "I never liked this infinity stuff anyway",
@@ -103,6 +115,16 @@ const allAchievements = {
   r136 : "I told you already, time is relative",
   r137 : "Now you're thinking with dilation!",
   r138 : "This is what I have to do to get rid of you.",
+  r139 : "Won't Let You Go",
+  r141 : "GODSPEED",
+  r142 : "Do you know how we got here?",
+  r143 : "The lie is the 9th Dimension",
+  r144 : "A newer beginning",
+  r145 : "Into the Shadowverse",
+  r146 : "Spacetime Breaker",
+  r147 : "Embrace Tradition",
+  r148 : "This achievement did exist",
+  r149 : "Escape from Vantablack",
   s11 : "The first one's always free",
   s12 : "Just in case",
   s13 : "It pays to have respect",
@@ -128,6 +150,7 @@ const allAchievements = {
   s37 : "You followed the instructions",
   s38 : "Professional bodybuilder",
 };
+
 const secretAchievementTooltips = {
     s11 : "Click on this achievement.",
     s12 : "Save 100 times without refreshing.",
@@ -154,6 +177,7 @@ const secretAchievementTooltips = {
     s37 : "Follow instructions.",
     s38 : "Get all your dimension bulk buyers to 1e100.",
   };
+
 const allAchievementNums = Object.invert(allAchievements)
 // to retrieve by value: Object.keys(allAchievements).find(key => allAchievements[key] === "L4D: Left 4 Dimensions");
 
@@ -181,15 +205,11 @@ function clearOldAchieves(){
 }
 
 function giveAchievement(name) {
-
     if (player.achievements.includes(name)){ clearOldAchieves(); }
-
     if (player.achievements.includes(allAchievementNums[name])) return false
-
     $.notify(name, "success");
     player.achievements.push(allAchievementNums[name]);
-    document.getElementById(name).className = "achievementunlocked"
-    kong.submitStats('Achievements', player.achievements.length);
+    document.getElementById(name).className = "achievementunlocked";
     if (name == "All your IP are belong to us" || name == "MAXIMUM OVERDRIVE") {
         player.infMult = player.infMult.times(4);
         player.autoIP = player.autoIP.times(4);
@@ -200,26 +220,30 @@ function giveAchievement(name) {
 
 function updateAchievements() {
   var amount = 0
-  for (var i=1; i<document.getElementById("achievementtable").children[0].children.length+1; i++) {
-      var n = 0
-      var achNum = i * 10
-      for (var l=0; l<8; l++) {
-          achNum += 1;
-          var name = allAchievements["r"+achNum]
-          if (player.achievements.includes("r"+achNum)) {
+
+  for (var i=1; i<document.getElementById("achievementtable").children[0].children.length + 1; i++) { // for each row
+      var n = 0 // amount of achievements completed in a row
+      var achNum = i * 10 // for achievement ID
+      for (var l=0; l<9; l++) {
+        achNum += 1;
+          var name = allAchievements["r" + achNum]
+          // console.log("r" + achNum);
+          if (player.achievements.includes("r" + achNum)) {
               n++
               document.getElementById(name).className = "achievementunlocked"
           } else {
               document.getElementById(name).className = "achievementlocked"
           }
       }
-      if (n == 8) {
+      if (n == 9) {
           amount++
-          document.getElementById("achRow"+i).className = "completedrow"
+          document.getElementById("achRow" + i).className = "completedrow"
       } else {
-          document.getElementById("achRow"+i).className = ""
+          document.getElementById("achRow" + i).className = ""
       }
   }
+
+  // secret achievements
   for (var i=1; i<document.getElementById("secretachievementtable").children[0].children.length+1; i++) {
       var n = 0
       var achNum = i * 10
@@ -242,10 +266,8 @@ function updateAchievements() {
       }
   }
 
-  player.achPow = Decimal.pow(1.5, amount)
-
-  document.getElementById("achmultlabel").textContent = "Current achievement multiplier on each Dimension: " + player.achPow.toFixed(1) + "x"
-
+  player.achPow = Decimal.pow(2.25, amount);
+  document.getElementById("achmultlabel").textContent = "Current achievement multiplier on each Dimension: " + player.achPow.toFixed(3) + "x"
 }
 
 function getSecretAchAmount() {

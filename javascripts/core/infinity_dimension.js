@@ -72,9 +72,7 @@ function DimensionPower(tier) {
   if (player.currentEternityChall == "eterc11") return new Decimal(1)
   var mult = dim.power
 
-  mult = mult.times(infDimPow)
-
-  mult = mult.times(kongAllDimMult)
+  mult = mult.times(infDimPow);
   if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
   if (player.achievements.includes("r75")) mult = mult.times(player.achPow);
   if (player.replicanti.unl && player.replicanti.amount.gt(1)) {

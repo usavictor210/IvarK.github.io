@@ -165,7 +165,7 @@ function timeDisplay(time) {
 }
 
 function preformat(int) {
-  if (int.toString().length == 1) return "0"+int
+  if (int.toString().length == 1) return "0" + int
   else return int
 }
 

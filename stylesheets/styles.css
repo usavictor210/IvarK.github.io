@@ -1276,6 +1276,31 @@ button {
     background: white;
 }
 
+.darkness {
+    background-color: #c38dc3 !important;
+    border: 2px solid #000000 !important;
+    color: #3e3b49 !important;
+}
+
+.darkness:hover {
+    background-color: #8a398369 !important;
+    color: #8178a3 !important;
+}
+
+.darknessbtn {
+    background-color: #c38dc3 !important;
+}
+
+.darknessbtn:hover {
+    background-color: #ffbefa !important;
+}
+
+.darkupg {
+    width: 250px;
+    height: 100px;
+    font-size: 11px;
+}
+
 .glyph {
     display:flex;
     justify-content:center;

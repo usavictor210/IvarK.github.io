@@ -109,6 +109,7 @@ if (player.infinitied > 0 && !player.challenges.includes("challenge1")) player.c
   if (player.timeDimension8 === undefined) player.timeDimension8 = {cost: new Decimal("1e3350"), amount: new Decimal(0), power: new Decimal(1), bought: 0 }
   if (player.why === undefined) player.why = 0
   if (player.options.animations === undefined) player.options.animations = {floatingText: true, bigCrunch: true, eternity: true, tachyonParticles: true}
+  if (player.adBlack === undefined) initializeDarkWell();
   setTheme(player.options.theme);
 
   sliderText.textContent = "Update rate: " + player.options.updateRate + "ms";
@@ -401,7 +402,7 @@ if (player.version < 5) {
 
 
   if (player.break == true) document.getElementById("break").textContent = "FIX INFINITY"
-  document.getElementById("infiMult").innerHTML = "Multiply infinity points from all sources by 2 <br>currently: "+shortenDimensions(player.infMult.times(kongIPMult)) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
+  document.getElementById("infiMult").innerHTML = "You gain 2x more IP.<br>Currently: "+shortenDimensions(player.infMult) +"x<br>Cost: "+shortenCosts(player.infMultCost)+" IP"
 
   document.getElementById("notation").textContent = "Notation: " + player.options.notation
 
@@ -791,6 +792,10 @@ function transformSaveToDecimal() {
   player.dilation.dilatedTime = new Decimal(player.dilation.dilatedTime)
   player.dilation.totalTachyonParticles = new Decimal(player.dilation.totalTachyonParticles)
   player.dilation.nextThreshold = new Decimal(player.dilation.nextThreshold)
+
+  player.adBlack.darkwell.darkness = new Decimal(player.adBlack.darkwell.darkness);
+  player.adBlack.darkEssence.amount = new Decimal(player.adBlack.darkEssence.amount);
+  updateRetroactivePow();
 }
 
 
@@ -822,7 +827,7 @@ function set_save(name, saveId, value) {
 function get_save(name) {
   try {
     return JSON.parse(atob(localStorage.getItem(name)), function(k, v) { return (v === Infinity) ? "Infinity" : v; });
-  } catch(e) { console.log("Fuck IE", e); }
+  } catch(e) { console.log("An error occurred:", e); }
 }
 
 function getRootSaveObject() {

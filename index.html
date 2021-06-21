@@ -7,27 +7,9 @@
     <link rel="icon" type="image/png" href="icon.png">
     <meta name="Antimatter Dimensions" content="A game about huge numbers and watching them go up." charset="utf-8"/>
     <h1 id="hiddenheader" style="display: none">Antimatter Dimensions</h1>
-    <script type="text/javascript" src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
     <script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="javascripts/notify.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/styles.css?3">
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-77268961-1', 'auto');
-        ga('send', 'pageview');
-
-    </script>
 </head>
 <img id="loading" src="images/Loading.png">
 <div id="snow" style="display: none; "></div>
@@ -65,35 +47,55 @@
             <button id="optionsbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Options</button>
             <button id="statisticsbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Statistics</button>
             <button id="achievementsbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Achievements</button>
+            <button id="darknessbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn darkness">Darkness</button>
             <button id="challengesbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Challenges</button>
             <button id="infinitybtn" style="font-family: Typewriter; font-size: 20px; display: none" class="infinitybtn">Infinity</button>
             <button id="eternitystorebtn" style="font-family: Typewriter; font-size: 20px; display: none" class="eternitytabbtn">Eternity</button>
-            <button id="shopbtn" style="font-family: Typewriter; font-size: 20px" class="tabbtn">Shop</button>
         </div>
         <div id="emptiness" class="tab" style="font-size: 150%">
             <br> The world has collapsed on itself due to excess of antimatter.
             <br>
             <br>
         </div>
-        <div id="shop" class="tab" style="font-size: 15px" >
-            <div align="center">
+        <div id="darknessStore" class="tab" style="font-size: 15px">
+            <div id="darknessExpansion1">
+            <br>
+            <div id="darkEssence1" style="color: black; font-size: 15px; width: 40%; margin: 0 auto">You have x Dark Essence.</div>
+            <br>
+            <br>
+            <tr>
+                <td><button class="secondarytabbtn" onclick="showDarkTab('darkWell')">Dark Well</button><td>
+                <td><button class="secondarytabbtn" onclick="showDarkTab('essence')">Essence Blessings</button><td>
+            </tr>
+            </div>
+            <div id="darkWell" class="darknesstab" align="center" style="display: none;">
                 <br>
-                <span id="kongip"> Double your IP gain from all sources. Forever. </span><br>
-                <button class="greedbtn" onclick="kong.purchaseIP()">40 Kreds</button>
-                <br><br><br>
-                <span id="kongep"> Double your EP gain from all sources. Forever. </span><br>
-                <button class="greedbtn" onclick="kong.purchaseEP()">50 Kreds</button>
-                <br><br><br>
-                <span id="kongdim"> Double all your dimension multipliers (dimensions 1-8). Forever. </span><br>
-                <button class="greedbtn" onclick="kong.purchaseDimMult()">30 Kreds</button>
-                <br><br><br>
-                <span id="kongalldim"> Double ALL the dimension multipliers (Normal, Infinity and Time). Forever. </span><br>
-                <button class="greedbtn" onclick="kong.purchaseAllDimMult()">60 Kreds</button>
-                <br><br><br>
-                <span>Get 6 hours worth of offline production. (Doesn't work for autobuyers)</span><br>
-                <button class="greedbtn" onclick="kong.purchaseTimeSkip()">10 Kreds</button>
-                <br><br><br>
-                <span style="font-size: 12px"><b>Disclaimer: These are not required to progress in the game, they are just to help and support the developer.</b></span>
+                <button id="quickResetDarkness" style="color:black; width: 300px; height: 70px; font-size: 12px;" class="unavailablebtn darknessbtn" onclick="darkEssenceReset()">Sacrifice all your Dimension Shifts/Boosts to gain dark essence</button>
+                <br>
+                <div>There is <span id="darknessVal" style="font-size: 24px; color: black">0</span> darkness in the universe.</div>
+                <span id="darknessGainInfo">Darkness is based on your total antimatter produced.</span>
+                <br>
+                <br>
+                Your Dark Well is currently at level <span id="darkWellLevel">1</span>.
+                <div style="font-size: 11px; color: black">(currently increasing the per-10 multiplier to <span id="darkWellMult">1.00x</span>)</div>
+                <br>
+                <button id="wellExtend" class="unavailablebtn" style="width: 200px; height: 80px;" onclick="extendWell()">Extend the well for <span id="darkWellCost">0</span> darkness.</button>
+            </div>
+            <div id="essence" class="darknesstab" align="center" style="display: none;">
+                <br>
+                Rebuyable upgrades
+                <br>
+                <br>
+                One time upgrades
+                <br>
+                <br>
+                <button id="darkUpg1" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(1)">First Theory<br>Dark Well levels provide a minor boost to Normal Dimensions<br><span id="dUpg1Cost">Cost: 1 Dark Essence</span></button>
+                <button id="darkUpg2" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(2)">Second Theory<br>Dimension Boosts are more powerful based on your highest 8th Dimensions<br><span id="dUpg2Cost">Cost: 10 Dark Essence</span></button>
+                <button id="darkUpg3" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(3)">Third Theory<br>Weaken the Darkness effect<br><span id="dUpg3Cost">Cost: 50 Dark Essence</span></button>
+                <br>
+                <button id="darkUpg4" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(4)">Fourth Theory<br><br><span id="dUpg1Cost">Cost: 1 Dark Essence</span></button>
+                <button id="darkUpg5" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(5)">Fifth Theory<br>Dimension Boosts are more powerful based on your highest 8th Dimensions<br><span id="dUpg2Cost">Cost: 10 Dark Essence</span></button>
+                <button id="darkUpg6" class="unavailablebtn darknessbtn darkupg" onclick="buyDarkUpg(6)">Sixth Theory<br>You can reach <br><span id="dUpg3Cost">Cost: 50 Dark Essence</span></button>
             </div>
         </div>
         <div id="eternitystore" class="tab" style="font-size: 15px; margin: 0 auto; display: none" align="center">
@@ -711,19 +713,19 @@
                             Dimension Shift: requires 20 Fourth Dimension
                         </td>
                         <td>
-                            <button id="softReset" style="color:black; width: 200px; height: 25px; font-size: 9px" class="storebtn">Reset the game for a new Dimension</button>
+                            <button id="softReset" style="color:black; width: 200px; height: 35px; font-size: 9px" class="storebtn">Reset the game for a new Dimension</button>
                         </td>
                     </tr>
                     <tr style="font-size: 15px">
                         <td id="secondResetLabel">
-                            Antimatter Galaxies: requires 80 Eight Dimension
+                            Antimatter Galaxies: requires 80 Eighth Dimension
                         </td>
                         <td>
                             <button id="secondSoftReset" style="color:black; width: 200px; height: 35px; font-size: 9px" class="storebtn">Lose all your previous progress, but get a tickspeed boost</button>
                         </td>
                     </tr>
                 </table>
-                <button id="quickReset" style="color:black; width: 200px; height: 50px; font-size: 12px; display: none" class="storebtn">Lose a reset, returning to the start of the reset</button>
+                <button id="quickReset" style="color:black; width: 200px; height: 50px; font-size: 12px; display: none" class="storebtn">Lose a reset, returning to the start of the previous reset</button>
             </div>
             <div id="infinitydimensions" class="dimtab">
                 <span id="EC12Pow"></span>
@@ -994,11 +996,6 @@
 					<td><div><button id="save" class="storebtn" style="color:black; width: 200px; height: 55px; font-size: 20px">Save</button></div></td>
 					<td><div><button id="load" class="storebtn" style="color:black; width: 200px; height: 55px; font-size: 20px">Load</button></div></td>
                 </tr>
-                <tr id="cloudOptions">
-                    <td><div><button onclick="playFabSaveCheck()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Cloud save</button></div></td>
-                    <td><div><button onclick="playFabLoadCheck()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Cloud load</button></div></td>
-                    <td><div><button id="cloud" onclick="toggleCloud()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Toggle automatic cloud saving/loading</button></div></td>
-                </tr>
                 <tr>
                     <td><div><button id="hotkeys" onclick="toggleHotkeys()" class="storebtn" style="color:black; width: 200px; height: 55px; font-size:120%">Disable hotkeys</button></div></td>
 					<td><div><button id="reset" class="storebtn" style="color:black; width: 200px; height: 55px; font-size: 20px">RESET THE GAME</button></div></td>
@@ -1048,7 +1045,7 @@
             <div id="stats" class="statstab">
                 <br>
                 <div id="totalmoney">You have made x antimatter.</div>
-                <div id="totalresets">You have made x dimensional boosts/shifts.</div>
+                <div id="totalresets">You have made x dimension boosts/shifts.</div>
                 <div id="galaxies">You have made x Antimatter galaxies.</div>
                 <br>
                 <div id="eternitied">You have eternitied x times.</div>
@@ -1175,21 +1172,21 @@
                             <div id="90 degrees to infinity" class="achievement achievementlocked" style="background-image: url(images/8.png)" ach-tooltip="Buy a single Eighth Dimension."><br></div>
                         </td>
                         <td>
-                            <div id="little worm throwing darts" class="achievement achievementlocked" style="background-image: url(images/ad-black1.png)" ach-tooltip="Unlock the Dark Well."><br></div>
+                            <div id="Something's wrong" class="achievement achievementlocked" style="background-image: url(images/ad-black1.png)" ach-tooltip="Unlock the Dark Well with your first Dimension Shift. Reward: Get +0.1x to your per-10 multiplier."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow2">
                         <td>
-                            <div id="To infinity!" class="achievement achievementlocked" style="background-image: url(images/9.png)" ach-tooltip="Reach Infinite antimatter. Reward: Start with 100 antimatter."><br></div>
+                            <div id="To infinity!" class="achievement achievementlocked" style="background-image: url(images/9.png)" ach-tooltip="Reach Infinite antimatter. Reward: Start with 200 antimatter."><br></div>
                         </td>
                         <td>
                             <div id="Fake News" class="achievement achievementlocked" style="background-image: url(images/25.png)" ach-tooltip="Encounter 50 different news messages."><br></div>
                         </td>
                         <td>
-                            <div id="The 9th Dimension is a lie" class="achievement achievementlocked" style="background-image: url(images/11.png)" ach-tooltip="Have exactly 99 Eighth Dimensions. Reward: Eighth Dimensions are 10% stronger."><br></div>
+                            <div id="The 9th Dimension is a lie" class="achievement achievementlocked" style="background-image: url(images/11.png)" ach-tooltip="Have exactly 99 Eighth Dimensions. Reward: Eighth Dimensions are 9% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="Antimatter Apocalypse" class="achievement achievementlocked" style="background-image: url(images/12.png)" ach-tooltip="Get over 10 QtVg (10e79) antimatter."><br></div>
+                            <div id="Antimatter Apocalypse" class="achievement achievementlocked" style="background-image: url(images/12.png)" ach-tooltip="Get over 1e80 antimatter."><br></div>
                         </td>
                         <td>
                             <div id="Boosting to the max" class="achievement achievementlocked" style="background-image: url(images/13.png)" ach-tooltip="Buy 10 Dimension Boosts."><br></div>
@@ -1204,65 +1201,65 @@
                             <div id="There's no point in doing that" class="achievement achievementlocked" style="background-image: url(images/16.png)" ach-tooltip="Buy a single First Dimension when you have over 1e150 of them. Reward: First Dimensions are 10% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black2.png)" ach-tooltip="???"><br></div>
+                            <div id="Down the Rabbit Hole" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="Gather your first units of Dark Essence. Reward: Expand the Darkness and gain access to new upgrades."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow3">
                         <td>
-                            <div id="I forgot to nerf that" class="achievement achievementlocked" style="background-image: url(images/17.png)" ach-tooltip="Get any Dimension multiplier over 10 No (10e30). Reward: First Dimensions are 5% stronger."><br></div>
+                            <div id="I forgot to nerf that" class="achievement achievementlocked" style="background-image: url(images/17.png)" ach-tooltip="Get any Dimension multiplier over 1e40. Reward: First Dimensions are 5% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="The Gods are pleased" class="achievement achievementlocked" style="background-image: url(images/18.png)" ach-tooltip="Get over 600x from Dimension Sacrifice in total. Reward: Sacrifice is slightly stronger."><br></div>
+                            <div id="The Gods are pleased" class="achievement achievementlocked" style="background-image: url(images/18.png)" ach-tooltip="Get over 1,000x from Dimensional Sacrifice in total. Reward: Sacrifice is slightly stronger."><br></div>
                         </td>
                         <td>
                             <div id="That's a lot of infinites" class="achievement achievementlocked" style="background-image: url(images/19.png)" ach-tooltip="Reach Infinity 10 times."><br></div>
                         </td>
                         <td>
-                            <div id="You didn't need it anyway" class="achievement achievementlocked" style="background-image: url(images/20.png)" ach-tooltip="Reach Infinite antimatter without having any 8th Dimensions. Reward: Dimensions 1-7 are 2% stronger."><br></div>
+                            <div id="You didn't need it anyway" class="achievement achievementlocked" style="background-image: url(images/20.png)" ach-tooltip="Reach Infinite antimatter without having any 8th Dimensions. Reward: Normal Dimensions 1-7 are 20% stronger."><br></div>
                         </td>
                         <td>
                             <div id="Don't you dare to sleep" class="achievement achievementlocked" style="background-image: url(images/10.png)" ach-tooltip="Be offline for over 6 hours in a row."><br></div>
                         </td>
                         <td>
-                            <div id="Claustrophobic" class="achievement achievementlocked" style="background-image: url(images/22.png)" ach-tooltip="Go Infinite with just 1 Antimatter Galaxy. Reward: Reduces starting tick interval by 2%."><br></div>
+                            <div id="Claustrophobic" class="achievement achievementlocked" style="background-image: url(images/22.png)" ach-tooltip="Go Infinite with just 1 Antimatter Galaxy. Reward: Reduce the starting tick interval by 4%."><br></div>
                         </td>
                         <td>
-                            <div id="That's fast!" class="achievement achievementlocked" style="background-image: url(images/23.png)" ach-tooltip="Go infinite in under 2 hours. Reward: Start with 1000 antimatter."><br></div>
+                            <div id="That's fast!" class="achievement achievementlocked" style="background-image: url(images/23.png)" ach-tooltip="Go Infinite in under 3 hours. Reward: Start with 2,000 antimatter."><br></div>
                         </td>
                         <td>
-                            <div id="I don't believe in Gods" class="achievement achievementlocked" style="background-image: url(images/24.png)" ach-tooltip="Buy a Galaxy without Sacrificing."><br></div>
+                            <div id="I don't believe in Gods" class="achievement achievementlocked" style="background-image: url(images/24.png)" ach-tooltip="Buy a Galaxy without Sacrificing in this Galaxy reset."><br></div>
                         </td>
                         <td>
-                            <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black3.png)" ach-tooltip="???"><br></div>
+                            <div id="Never the same again" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="Go Infinite without any Dark Well upgrades and Essence Blessings."><br></div>
                         </td>
                     </tr>
                     <tr id="achRow4">
                         <td>
-                            <div id="Spreading Cancer" class="achievement achievementlocked" style="background-image: url(images/46.png)" ach-tooltip="Buy ten Galaxies in total while using cancer notation."><br></div>
+                            <div id="Spreading Cancer" class="achievement achievementlocked" style="background-image: url(images/46.png)" ach-tooltip="Buy ten Galaxies in total while using Cancer notation. Reward: Gain a very small multiplier to IP based on Galaxies bought overall."><br></div>
                         </td>
                         <td>
                             <div id="Supersanic" class="achievement achievementlocked" style="background-image: url(images/26.png)" ach-tooltip="Have antimatter/sec exceed your current antimatter above 1 Tg (1e63)."><br></div>
                         </td>
                         <td>
-                            <div id="Zero Deaths" class="achievement achievementlocked" style="background-image: url(images/27.png)" ach-tooltip="Get to Infinity without Dimension shifts, boosts or galaxies in a challenge. Reward: Dimensions 1-4 are 25% stronger."><br></div>
+                            <div id="Zero Deaths" class="achievement achievementlocked" style="background-image: url(images/27.png)" ach-tooltip="Get to Infinity without Dimension Shifts, Boosts or Galaxies in a challenge. Reward: Dimensions 1-4 are 25% stronger."><br></div>
                         </td>
                         <td>
                             <div id="Over in 30 seconds" class="achievement achievementlocked" style="background-image: url(images/28.png)" ach-tooltip="Have antimatter/sec exceed your current antimatter for 30 consecutive seconds."><br></div>
                         </td>
                         <td>
-                            <div id="Faster than a potato" class="achievement achievementlocked" style="background-image: url(images/29.png)" ach-tooltip="Get more than 100 Sx (100e21) ticks per second. Reward: Reduces starting tick interval by 2%."><br></div>
+                            <div id="Faster than a potato" class="achievement achievementlocked" style="background-image: url(images/29.png)" ach-tooltip="Get more than 1e23 ticks per second. Reward: Reduce the starting tick interval by 4%."><br></div>
                         </td>
                         <td>
-                            <div id="Multidimensional" class="achievement achievementlocked" style="background-image: url(images/30.png)" ach-tooltip="Reach 1 Qd (1e12) of all dimensions except 8th."><br></div>
+                            <div id="Multidimensional" class="achievement achievementlocked" style="background-image: url(images/30.png)" ach-tooltip="Have 1 Qd (1e12) of all Normal Dimensions, except for the 8th."><br></div>
                         </td>
                         <td>
-                            <div id="Daredevil" class="achievement achievementlocked" style="background-image: url(images/31.png)" ach-tooltip="Complete 2 challenges."><br></div>
+                            <div id="Daredevil" class="achievement achievementlocked" style="background-image: url(images/31.png)" ach-tooltip="Complete 3 Challenges."><br></div>
                         </td>
                         <td>
-                            <div id="AntiChallenged" class="achievement achievementlocked" style="background-image: url(images/32.png)" ach-tooltip="Complete all the challenges. Reward: All dimensions are 10% stronger."><br></div>
+                            <div id="AntiChallenged" class="achievement achievementlocked" style="background-image: url(images/32.png)" ach-tooltip="Complete all the challenges. Reward: Normal Dimensions are 2x more powerful."><br></div>
                         </td>
                         <td>
-                            <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black4.png)" ach-tooltip="???"><br></div>
+                            <div id="Alterations" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                         </td>
                     </tr>
                     <tr id="achRow5">
@@ -1276,22 +1273,22 @@
                             <div id="Definitely not worth it" class="achievement achievementlocked" style="background-image: url(images/35.png)" ach-tooltip="Max all the autobuyers."><br></div>
                         </td>
                         <td>
-                            <div id="That's faster!" class="achievement achievementlocked" style="background-image: url(images/36.png)" ach-tooltip="Infinity in 10 minutes or less. Reward: Start with 200000 antimatter."><br></div>
+                            <div id="That's faster!" class="achievement achievementlocked" style="background-image: url(images/36.png)" ach-tooltip="Infinity in 10 minutes or less. Reward: Start with 1,000,000 antimatter."><br></div>
                         </td>
                         <td>
-                            <div id="Forever isn't that long" class="achievement achievementlocked" style="background-image: url(images/37.png)" ach-tooltip="Infinity in 1 minute or less. Reward: Start with 1e10 antimatter."><br></div>
+                            <div id="Forever isn't that long" class="achievement achievementlocked" style="background-image: url(images/37.png)" ach-tooltip="Infinity in 50 seconds or less. Reward: Start with 1e10 antimatter."><br></div>
                         </td>
                         <td>
-                            <div id="Many Deaths" class="achievement achievementlocked" style="background-image: url(images/38.png)" ach-tooltip="Complete the Second Dimension Autobuyer challenge in 3 minutes or less. Reward: All dimensions are stronger in first 3 minutes of infinity."><br></div>
+                            <div id="Many Deaths" class="achievement achievementlocked" style="background-image: url(images/38.png)" ach-tooltip="Complete the Second Dimension Autobuyer challenge in 3 minutes or less. Reward: All Dimensions are stronger in the first 3 minutes of infinity."><br></div>
                         </td>
                         <td>
-                            <div id="Gift from the Gods" class="achievement achievementlocked" style="background-image: url(images/39.png)" ach-tooltip="Complete the Eighth Dimension Autobuyer challenge in 3 minutes or less. Reward: Dimensional sacrifices are a lot stronger."><br></div>
+                            <div id="Gift from the Gods" class="achievement achievementlocked" style="background-image: url(images/39.png)" ach-tooltip="Complete the Eighth Dimension Autobuyer challenge in less than 1 minute. Reward: Dimensional Sacrifices are a lot stronger."><br></div>
                         </td>
                         <td>
-                            <div id="Is this hell?" class="achievement achievementlocked" style="background-image: url(images/40.png)" ach-tooltip="Complete the Tickspeed Autobuyer challenge in 3 minutes or less. Reward: Boost per 10 dimensions +1%."><br></div>
+                            <div id="Is this hell?" class="achievement achievementlocked" style="background-image: url(images/40.png)" ach-tooltip="Complete the Tickspeed Autobuyer challenge in 1 minute and 30 seconds. Reward: Boost per 10 dimensions +2%."><br></div>
                         </td>
                         <td>
-                            <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black5.png)" ach-tooltip="???"><br></div>
+                            <div id="Hell or Heaven" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                         </td>
                     </tr>
                     <tr id="achRow6">
@@ -1302,7 +1299,7 @@
                             <div id="Oh hey, you're still here" class="achievement achievementlocked" style="background-image: url(images/402.png)" ach-tooltip="Reach 1e8 IP per minute."><br></div>
                         </td>
                         <td>
-                            <div id="A new beginning." class="achievement achievementlocked" style="background-image: url(images/403.png)" ach-tooltip="Begin generation of infinity power."><br></div>
+                            <div id="A new beginning." class="achievement achievementlocked" style="background-image: url(images/403.png)" ach-tooltip="Begin generation of Infinity Power."><br></div>
                         </td>
                         <td>
                             <div id="1 million is a lot" class="achievement achievementlocked" style="background-image: url(images/404.png)" ach-tooltip="Reach 1e6 infinity power."><br></div>
@@ -1320,7 +1317,7 @@
                             <div id="You did this again just for the achievement right?" class="achievement achievementlocked" style="background-image: url(images/408.png)" ach-tooltip="Complete the Third Dimension Autobuyer challenge in 10 seconds or less. Reward: First dimensions are 50% stronger."><br></div>
                         </td>
                         <td>
-                            <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black6.png)" ach-tooltip="???"><br></div>
+                            <div id="nil" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                         </td>
                     </tr>
                     <tr id="achRow7">
@@ -1349,7 +1346,7 @@
                                 <div id="Blink of an eye" class="achievement achievementlocked" style="background-image: url(images/48.gif)" ach-tooltip="Get to Infinity in under 200 milliseconds. Reward: Start with 1e25 antimatter and all dimensions are stronger in first 300ms of infinity."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black7.png)" ach-tooltip="???"><br></div>
+                                <div id="Left blank" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow8">
@@ -1378,7 +1375,7 @@
                                 <div id="Yet another infinity reference" class="achievement achievementlocked" style="background-image: url(images/56.png)" ach-tooltip="Get xInfinity multiplier in a single sacrifice. Reward: Sacrifices are stronger."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black8.png)" ach-tooltip="???"><br></div>
+                                <div id="MISSING ACHIEVEMENT" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow9">
@@ -1407,7 +1404,7 @@
                                 <div id="0 degrees from infinity" class="achievement achievementlocked" style="background-image: url(images/64.png)" ach-tooltip="Unlock the 8th Infinity Dimension."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black9.png)" ach-tooltip="???"><br></div>
+                                <div id="Eternal Suffering" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow10">
@@ -1436,7 +1433,7 @@
                                 <div id="We could afford 9" class="achievement achievementlocked" style="background-image: url(images/72.png)" ach-tooltip="Eternity with exactly 9 replicanti."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black10.png)" ach-tooltip="???"><br></div>
+                                <div id="We can't afford 10" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow11">
@@ -1465,7 +1462,7 @@
                                 <div id="IT'S OVER 9000" class="achievement achievementlocked" style="background-image: url(images/80.png)" ach-tooltip="Get a total sacrifice multiplier of 1e9000. Reward: Sacrifice doesn't reset your dimensions."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black11.png)" ach-tooltip="???"><br></div>
+                                <div id="Theory of Nothing" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow12">
@@ -1494,7 +1491,7 @@
                                 <div id="What do I have to do to get rid of you" class="achievement achievementlocked" style="background-image: url(images/88.png)" ach-tooltip="Reach 1e22000 IP without any time studies. Reward: Time dimensions are multiplied by the number of studies you have."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black12.png)" ach-tooltip="???"><br></div>
+                                <div id="harness corruption;" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="???"><br></div>
                             </td>
                         </tr>
                         <tr id="achRow13">
@@ -1523,7 +1520,36 @@
                                 <div id="This is what I have to do to get rid of you." class="achievement achievementlocked" style="background-image: url(images/96.png)" ach-tooltip="Reach 1e20000 IP without any time studies while dilated."><br></div>
                             </td>
                             <td>
-                                <div id="unknown" class="achievement achievementlocked" style="background-image: url(images/ad-black13.png)" ach-tooltip="???"><br></div>
+                                <div id="Won't Let You Go" class="achievement achievementlocked" style="background-image: url(images/achhidden.png)" ach-tooltip="Bruh"><br></div>
+                            </td>
+                        </tr>
+                        <tr id="achRow14">
+                            <td>
+                                <div id="GODSPEED" class="achievement achievementlocked" style="background-image: url(images/ad-black14.png)" ach-tooltip="Godspeed. Reach into the Void"><br></div>
+                            </td>
+                            <td>
+                                <div id="Do you know how we got here?" class="achievement achievementlocked" style="background-image: url(images/ad-black15.png)" ach-tooltip="???"><br></div>
+                            </td>
+                            <td>
+                                <div id="The lie is the 9th Dimension" class="achievement achievementlocked" style="background-image: url(images/ad-black16.png)" ach-tooltip="???"><br></div>
+                            </td>
+                            <td>
+                                <div id="A newer beginning" class="achievement achievementlocked" style="background-image: url(images/ad-black17.png)" ach-tooltip="Begin generation of Chaos Points."><br></div>
+                            </td>
+                            <td>
+                                <div id="Into the Shadowverse" class="achievement achievementlocked" style="background-image: url(images/ad-black18.png)" ach-tooltip="Unlock universe navigation."><br></div>
+                            </td>
+                            <td>
+                                <div id="Spacetime Breaker" class="achievement achievementlocked" style="background-image: url(images/ad-black19.png)" ach-tooltip="Reach 1.8e308 Tachyon Particles."><br></div>
+                            </td>
+                            <td>
+                                <div id="Embrace Tradition" class="achievement achievementlocked" style="background-image: url(images/ad-black20.png)" ach-tooltip="???"><br></div>
+                            </td>
+                            <td>
+                                <div id="This achievement did exist" class="achievement achievementlocked" style="background-image: url(images/ad-black21.png)" ach-tooltip="???"><br></div>
+                            </td>
+                            <td>
+                                <div id="Escape from Vantablack" class="achievement achievementlocked" style="background-image: url(images/ad-black22.png)" ach-tooltip="Complete all 8 Void Challenges."><br></div>
                             </td>
                         </tr>
                 </table>
@@ -1646,19 +1672,19 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Reach infinity for the first time.</span>
+                                <span style="font-size: 110%">Reach Infinity for the first time.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
                                     <button id="challenge1" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: First Dimension autobuyer</span>
+                                    <span>Reward: Get the First Dimension autobuyer, and Normal Challenges give a 1.125x multiplier to Normal Dimensions per unique completion</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Buying anything halts your production, gradually coming back over 3 minutes.</span>
+                                <span style="font-size: 110%">Buying anything halts your production, gradually coming back over 4 minutes. Darkness gain is dependent on C2 percentage.</span>
                                 <br>
                                 <br>
 
@@ -1666,7 +1692,7 @@
 
                                     <button id="challenge2" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Second Dimension autobuyer</span>
+                                    <span>Reward: Get the Second Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1674,7 +1700,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">First dimension is heavily weakened but gets an exponentially increasing bonus that resets on reset.</span>
+                                <span style="font-size: 110%">The First Normal Dimension is heavily weakened, but gets a quadratically increasing bonus that resets on reset. Dark Well's effect is weakened.</span>
                                 <br>
                                 <br>
 
@@ -1682,13 +1708,13 @@
 
                                     <button id="challenge3" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Third Dimension autobuyer</span>
+                                    <span>Reward: Get the Third Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Buying a dimension automatically erases all lower tier dimensions, like a sacrifice without the boost.</span>
+                                <span style="font-size: 110%">Buying a Dimension automatically erases all lower tier Dimensions, like a sacrifice without the boost.</span>
                                 <br>
                                 <br>
 
@@ -1696,7 +1722,7 @@
 
                                     <button id="challenge8" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Fourth Dimension autobuyer</span>
+                                    <span>Reward: Get the Fourth Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1704,7 +1730,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Tickspeed starts at 7%.</span>
+                                <span style="font-size: 110%">Tickspeed starts at 6%, and Antimatter Galaxies are slightly weaker.</span>
                                 <br>
                                 <br>
 
@@ -1712,13 +1738,13 @@
 
                                     <button id="challenge6" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Fifth Dimension autobuyer</span>
+                                    <span>Reward: Get the Fifth Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Each dimension costs the dimension 2 before it, with modified prices</span>
+                                <span style="font-size: 110%">Each Dimension costs the Dimension 2 tiers before it, with modified prices. Dark Well upgrade cost scales faster.</span>
                                 <br>
                                 <br>
 
@@ -1726,7 +1752,7 @@
 
                                     <button id="challenge10" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Sixth Dimension autobuyer</span>
+                                    <span>Reward: Get the Sixth Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1734,7 +1760,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Multiplier per 10 dimensions is random from 0.30 and 10</span>
+                                <span style="font-size: 110%">The multiplier per 10 dimensions starts at 1.1x and increases by +0.1x for every new boost up to 1.5x. Dark Well is disabled.</span>
                                 <br>
                                 <br>
 
@@ -1742,13 +1768,13 @@
 
                                     <button id="challenge9" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Seventh Dimension autobuyer</span>
+                                    <span>Reward: Get the Seventh Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Dimension Boost and galaxies are useless, sacrifice resets everything but is immensely more powerful</span>
+                                <span style="font-size: 110%">Dimension Boosts and Galaxies are useless. Sacrifice resets everything, but is immensely more powerful. However, Darkness grows over time, and can slowly decay Sacrifice multiplier. Dark Well is disabled.</span>
                                 <br>
                                 <br>
 
@@ -1756,7 +1782,7 @@
 
                                     <button id="challenge11" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Eighth Dimension autobuyer</span>
+                                    <span>Reward: Get the Eighth Dimension autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1764,7 +1790,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Whenever you buy 10 of a dimension or tickspeed, everything else of equal cost will increase to its next cost step.</span>
+                                <span style="font-size: 110%">Whenever you buy 10 of a Dimension or Tickspeed, everything else of equal cost will increase to its next cost step. Costs are multiplied by 10.</span>
                                 <br>
                                 <br>
 
@@ -1772,13 +1798,13 @@
 
                                     <button id="challenge5" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Tickspeed autobuyer</span>
+                                    <span>Reward: Get the Tickspeed autobuyer</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">There are only 6 dimensions, with dimension boost and antimatter galaxy costs modified.</span>
+                                <span style="font-size: 110%">There are only 6 Dimensions, with Dimension Boost and Antimatter Galaxy costs modified. Boost and Galaxy costs also scale immediately.</span>
                                 <br>
                                 <br>
 
@@ -1786,7 +1812,7 @@
 
                                     <button id="challenge4" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Automated Dimension Boosts</span>
+                                    <span>Reward: Get the Dimension Boost autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1794,7 +1820,7 @@
                     <tr>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">There's normal matter which rises. If it exceeds your antimatter, it will dimension boost without giving the bonus.</span>
+                                <span style="font-size: 110%">There's normal matter which rises. If it exceeds your antimatter, it will act as a Big Crunch without giving the bonus.</span>
                                 <br>
                                 <br>
 
@@ -1802,13 +1828,13 @@
 
                                     <button id="challenge12" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Automated Galaxies</span>
+                                    <span>Reward: Get the Galaxy autobuyer</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class= "challengediv">
-                                <span style="font-size: 110%">Each dimension produces the dimension 2 below it; first dimensions produce reduced antimatter.</span>
+                                <span style="font-size: 110%">Each Dimension produces the Dimension 2 tiers below it; First Dimensions produce nothing.</span>
                                 <br>
                                 <br>
 
@@ -1816,7 +1842,7 @@
 
                                     <button id="challenge7" class="challengesbtn">Start</button>
                                     <br>
-                                    <span>Reward: Automated Big Crunches</span>
+                                    <span>Reward: Get the Big Crunch autobuyer</span>
                                 </div>
                             </div>
                         </td>
@@ -1828,7 +1854,7 @@
                     <tr>
                         <td>
                             <div class="infchallengediv" id="postc1div" style="height: 140px; display: none">
-                                <span>All previous challenges (except tickspeed challenge and automatic big crunch challenge) at once.</span>
+                                <span>All previous challenges (except Tickspeed Challenge and Automatic Big Crunch Challenge) are applied at once.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1877,7 +1903,7 @@
                                     <button id="postc4" class="challengesbtn" onclick="startChallenge('postc4', new Decimal('1e13000'))">Start</button>
                                     <br>
                                     <span id="postc4goal" >Goal: 1e13000</span><br>
-                                    <span>Reward: All normal dimension multipliers become multiplier^1.05</span>
+                                    <span>Reward: All Normal Dimension multipliers are raised to the power of 1.05.</span>
                                 </div>
                             </div>
                         </td>
@@ -1892,13 +1918,13 @@
                                     <button id="postc5" class="challengesbtn" onclick="startChallenge('postc5', new Decimal('1e11111'))">Start</button>
                                     <br>
                                     <span id="postc5goal" >Goal: 1e11111</span><br>
-                                    <span>Reward: Galaxies are 10% more powerful and reduce the requirements for them and dimensional boosts by 1</span>
+                                    <span>Reward: Galaxies are 10% more powerful and reduce the requirements for them and Dimension boosts by 1</span>
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div class="infchallengediv" id="postc6div" style="height: 140px; display: none">
-                                <span>There's an exponentially rising matter that divides the multiplier on all of your dimensions.</span>
+                                <span>There's an exponentially rising matter that divides the multiplier on all of your Normal Dimensions.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -1913,7 +1939,7 @@
                     <tr>
                             <td>
                                 <div class="infchallengediv" id="postc7div" style="height: 140px; display: none">
-                                    <span>You can't get antimatter Galaxies, but dimensional boost multiplier 2.5x -> 10x</span>
+                                    <span>You can't get Antimatter Galaxies, but Dimension Boost multiplier is increased to 10x.</span>
                                     <br>
                                     <br>
                                     <div class="outer">
@@ -2115,7 +2141,7 @@
                         </td>
                         <td>
                             <div class="eterchallengediv" id="eterc12div" style="height: 140px; display: none">
-                                <span>The game runs 1000x slower.</span>
+                                <span>The game runs 1,000x slower.</span>
                                 <br>
                                 <br>
                                 <div class="outer">
@@ -2759,7 +2785,6 @@
 
 <script type="text/javascript"src="PlayFab/PlayFabClientApi.js"></script>
 <script type="text/javascript" src="javascripts/autobuyer.js"></script>
-<!-- script type="text/javascript" src="javascripts/decimal.js"></script> -->
 <script type="text/javascript" src="javascripts/breakinfinity.js"></script>
 <script type="text/javascript" src="javascripts/chart.js"></script>
 <script type="text/javascript" src="javascripts/lz-string.js"></script>
@@ -2775,6 +2800,9 @@
 <script type="text/javascript" src="javascripts/core/time_dimension.js"></script>
 <script type="text/javascript" src="javascripts/core/dimboost.js"></script>
 <script type="text/javascript" src="javascripts/core/timestudies.js"></script>
+<script type="text/javascript" src="javascripts/black/darkWell.js"></script>
+<script type="text/javascript" src="javascripts/black/darkEssence.js"></script>
+<script type="text/javascript" src="javascripts/black/darkness.js"></script>
 <script type="text/javascript" src="javascripts/core/canvases.js"></script>
 <script type="text/javascript" src="javascripts/core/devtools.js"></script>
 <script type="text/javascript" src="javascripts/core/load_functions.js"></script>

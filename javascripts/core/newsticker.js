@@ -35,7 +35,7 @@ newsArray = [//always true
 ["Doesn't it annoy you when people don't finish their", true, "a84"], ["Don't anti-quote me on this", true, "a85"], ["Antimatter is honest, matter makes up everything", true, "a86"],
 ["According to no known laws of aviation, there are multiple ways a bee should be able to be swallowed up by antimatter", true, "a87"], ["You either die as matter or live long enough to be consumed by the antimatter, and then die again", true, "a88"],
 ["If you gaze long enough into the antimatter, the antimatter gazes back into you", true, "a89"], ["Always gonna give you up. Always gonna let you down. - anti-Rick Astley", true, "a90"],
-["Antimatter Dimensions: the next update is always 5 hours away. Always.", true, "a91"], ["#DimensionLivesAntimatter", true, "a92"],
+["Antimatter Dimensions: the next update is always 5 hours away. Always.", true, "a91"], ["#The previous contents of this news ticker was a big bruh moment", true, "a92"],
 ["Do antimatter people with suicidal thoughts get depressants?", true, "a93"], ["To matter or to antimatter, that is the question.", true, "a94"], ["Why is everything so Hevi?",  true, "a95"],
 ["It has been scientifically proven ages ago, that cats made of matter are assholes. We have good news, because cats made of antimatter are still assholes",  true, "a96"],
 ["Nobody once told me the anti-world wasn’t gonna roll me", true, "a97"], ["Antimatter is like internet. If you're reading this, you can't have enough of it.",  true, "a98"],
@@ -124,7 +124,7 @@ newsArray = [//always true
 ["Somebody told me to wait five hours for the update yesterday but it's today and it still hasn't come! What do I do?", 'player.newsArray.includes("a91") && player.totalTimePlayed >= 600*300', "n8"],
 //hard
 ["You do know that you won't reach Infinity in -1 seconds, right?", "player.bestInfinityTime == 0.1", "c1"],
-["Where does Antimatter Nemo live? In a NNnNeMI-NNnNe.", "player.totalmoney.e >= 3e6", "c2"],  //might not be poss?
+["Where does Antimatter Nemo live? In a NNnNeMI-NNnNe.", "player.totalmoney.e >= 3e6", "c2"],
 ["Anti Emoji Movie MMMCMXCIX is a major hit!", "player.spreadingCancer >= 3999", "c3"],
 ["Achievement Unlocked!", "player.achievements.length == 88", "c4"],
 ["Did you use an autoclicker for that?", "player.timestudy.studies.includes(131) && player.thisInfinityTime <= 600 && player.replicanti.galaxies >= 50", "c5"],
@@ -150,10 +150,32 @@ newsArray = [//always true
 //missable / pay req
 ["How dare you actually get zero deaths on a first run?", 'player.achievements.includes("r43") && player.infinitied == 1 && player.eternities == 0', "s1"],
 ["Legend says the ninth dimension is supposed to be found here, but I don't see anything.", "player.money.e >= 41900 && !player.replicanti.unl && player.eternities == 0", "s2"],
-["Person with money likes to support this game.", "kongDimMult > 1 || kongIPMult > 1", "s3"],
-["Whale is bad at making smart purchases.", "kongIPMult > 500 && kongDimMult < 5e307", "s4"],
-["Whale complains that the game broke.", "kongDimMult > 5e307", "s5"],
-["Whale complains that their buying isn't doing anything.", "kongIPMult > 1.8e16", "s6"]
+["Person with money likes to support this game.", true, "s3"],
+["Whale is bad at making smart purchases.", true, "s4"],
+["Whale complains that the game broke.", true, "s5"],
+["Whale complains that their buying isn't doing anything.", true, "s6"]
+
+// Funny news tickers
+["This message is sponored by RAID: SHADOW LEGENDS - Raid is a turn based rpg done right. In case you’ve been living under a rock or are in Vivi's server and haven’t heard, Raid is a yandere mobile game that changes everything about ASMR. The game is crazy popular with @shadow meme poster with almost 15 downloads in this realm alone. Raid is an epic dank fantasy done white. A hero is you - collecting turn based game with over 4 champions to collect and customize. In FallenShadowASMR Realm sponsored by Raid Shadow Legends you can get yandere eyeball collecting GFs, dark voiced ara ara vibe women, undead boob ghost girl #waifus who bust out of their shirts from the oversized bobba, and less. Raid with friend in a Klan, claim glory in the simp arena of Twitch. Some other cool features are multibattle auto mode where the mods yell at you for posting lewds, set battles to run in auto mode while you do something else even though you don\'t have a life you fucking simp weeb. Spend less time grinding at the mall and starring at the girl you've been crushing on since the 8th grade and more time developing your team of carbon copy cutouts and finding the fun stuff you paid for you pathetic wimp. They also have weekly tournaments and events, such as fighting in the arena, running special dungeons, or leveling up your heroines. There’s always a way to compete and win extra prizes every week. The game is growing super fast, check out this road map they’ve published but redacted twice. They actually have huge plans for updates over the next 6 days. There’s Finite content for you to enjoy and since you have no life there's no time to get bored. A new faction, a tag team arena featuring ASMRtists that you've never heard of in languages you can't understand like the botson accent or Congolense, and even a new clan boss named Morton you’ll be able to fight with your clan mate because you only have one friend out of pity for your sad existence. You can find me under the name @RxDonuto and you can get blocked. Go to the link in the description and you’ll get 5 silver and a free epic champion as part of the new player program. Start your raid today!", true, "a1"],
+["I swear this mod only exists because of the shenanigans within the darkness.", true, "a2"],
+["no", true, "a3"],
+["OSTRICH SHANE NINE TWENTY FALLENJOHNATHAN MY MICROPHONE", true, "a4"],
+["who let the darkness outside this early in the morning?", player.achievements.includes("a19"), "a5"],
+["Weather forecast: In the morning, expect a solar eclipse to occur with temperatures of up to 176 degrees. By the afternoon, a black hole emerges with temperatures as low as -56 degrees. Tonight, expect the end.", true, "a6"],
+["Expect half of these to not make sense. Actually, everything won't make sense. Not when your mind is foggy.", true, "a7"],
+["These three words will shock you: Twin little sisters.", true, "a8"],
+["pls no racist k thx", true, "a9"],
+["I have your family at gunpoint.", player.achievements.includes("a19"), "a10"],
+["YOUR EAR KEEPS GOING INTO YOUR HEAD", true, "a11"],
+["YOUR OTHER EAR IS IN YOUR HEAD NOW", player.achievements.includes("a11"), "a12"],
+["I NEED TO SUPERGLUE YOUR EARS TO YOUR HEAD", player.achievements.includes("a12"), "a13"],
+["s sh sha shad shado shadow", true, "a14"],
+["step inside, the darkness is waiting.", true, "a15"],
+["Welcome to the Void! There is nothing around here. Maybe except for you and a couple things you might know. If anyone makes you believe anything about the void, do not trust them. They are heretics.", true, "a16"],
+["is this a fallenshadow reference", player.achievements.includes("pat1"), "a17"],
+["Snap back to reality", true, "a18"],
+["You've played this before, but it seems much slower. I wonder why...", true, "a19"],
+["Are you bored or something", true, "a20"]
 ];}
 
 var s = document.getElementById('news');

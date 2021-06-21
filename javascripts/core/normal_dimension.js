@@ -11,8 +11,6 @@ function getDimensionFinalMultiplier(tier) {
   }
 
   multiplier = multiplier.times(player.achPow);
-  multiplier = multiplier.times(kongDimMult)
-  multiplier = multiplier.times(kongAllDimMult)
 
   if (player.currentEternityChall == "eterc9") multiplier = multiplier;
   else multiplier = multiplier.times(player.infinityPower.pow(7).max(1))
@@ -174,11 +172,10 @@ function hasInfinityMult(tier) {
     }
     
     function getDimensionPowerMultiplier(tier) {
-        let dimMult = 2;
-    
-    
-        if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") dimMult = Math.pow(10/0.30,Math.random())*0.30
-    
+        // per-10 multiplier
+        let dimMult = 1.6;
+        if (player.adBlack.darkwell.unlocked) dimMult += getDarkWellEffect();
+        if (player.currentChallenge == "challenge9" || player.currentChallenge == "postc1") dimMult = Math.pow(10 / 0.30, Math.random()) * 0.30
         if (player.infinityUpgrades.includes('dimMult')) dimMult *= 1.1;
         if (player.achievements.includes("r58")) dimMult *= 1.01;
         dimMult += ECTimesCompleted("eterc3") * 0.8
